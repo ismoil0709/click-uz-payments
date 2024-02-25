@@ -15,7 +15,6 @@ import java.util.List;
 public class Field extends Auditing{
     private String name;
     private String fullText;
-    private String regex;
     private List<String> values;
     private String format;
 }

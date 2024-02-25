@@ -1,4 +1,4 @@
-package uz.pdp.clickuzpayments.dto.response;
+package uz.pdp.clickuzpayments.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -21,6 +21,9 @@ public class ServiceDto {
     private Boolean isMaintenance = true;
     private List<FieldDto> fields;
     private String url;
+    private Integer cashback;
+    private Double longitude;
+    private Double latitude;
 
     public ServiceDto(Service service) {
         this.id = service.getId();
@@ -28,6 +31,9 @@ public class ServiceDto {
         this.category = service.getCategory();
         this.isMaintenance = service.getIsMaintenance();
         this.url = service.getUrl();
+        this.cashback = service.getCashback();
+        this.latitude = service.getLatitude();
+        this.longitude = service.getLongitude();
         this.fields = service.getForm().getFields().stream().map(FieldDto::new).toList();
     }
 
@@ -37,13 +43,11 @@ public class ServiceDto {
     public static class FieldDto {
         private String name;
         private String fullText;
-        private String regex;
         private List<String> values;
         private String format;
         public FieldDto(Field field) {
             this.name = field.getName();
             this.fullText = field.getFullText();
-            this.regex = field.getRegex();
             this.values = field.getValues();
             this.format = field.getFormat();
         }

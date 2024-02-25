@@ -1,13 +1,21 @@
+
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: ismoil_0709
     url: jdbc:postgresql://localhost:5432/click_uz_payments
-  cloud:
-    config:
-      enabled: false
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
+  application:
+    name: click-uz-payments
+  config:
+    import: optional:configserver:http://localhost:8101
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8741/eureka
+server:
+  port: 1101

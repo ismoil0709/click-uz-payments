@@ -6,6 +6,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PaymentStatus {
-    SUCCESSFULLY,
-    ERROR
+    SUCCESS,
+    FAILED,
 }

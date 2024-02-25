@@ -1,19 +1,21 @@
 package uz.pdp.clickuzpayments.proxy;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import uz.pdp.clickuzpayments.dto.CustomResponseEntity;
+import uz.pdp.clickuzpayments.dto.SetBalanceDto;
+import uz.pdp.clickuzpayments.model.Card;
 
-import java.math.BigDecimal;
+import java.util.Map;
 
-@FeignClient(value = "click-uz-cards")
+@FeignClient(name = "click-uz-cards")
 public interface CardProxy {
-    @GetMapping("")
-    ResponseEntity<?> getCardById(Long id);
-    @GetMapping("/{balance}")
-    void setBalance(@PathVariable BigDecimal balance);
-    @GetMapping("")
-    ResponseEntity<?> getCardByNumber(String cardNumber);
+    @GetMapping("/card/{id}")
+    CustomResponseEntity<Card> getCardById(@RequestHeader("Authorization") String token, @PathVariable Long id);
+    @PostMapping("/card/balance")
+    void setBalance(@RequestHeader("Authorization") String token, @RequestBody SetBalanceDto setBalanceDto);
 }
